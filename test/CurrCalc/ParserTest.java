@@ -1,5 +1,11 @@
 package CurrCalc;
 
-public class ParserTest {
+import org.junit.Test;
+
+class ParserTest {
     
+    @Test
+    void test(){
+        
+    }
 }
