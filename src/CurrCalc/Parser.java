@@ -24,8 +24,17 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
+    /**
+     * Constructor
+     */
     public Parser () {}
 
+    /**
+     * A method to parse given string containing data from 
+     * an xml file.
+     * @param   xmlString   string with contents of an xml file
+     * @return  a list with read Currency objects
+     */
     public ArrayList<Currency> parse (String xmlString){
 
         ArrayList<Currency> currencies = new ArrayList<Currency>();
@@ -75,6 +84,12 @@ public class Parser {
         return currencies;
     }
 
+    /**
+     * A helper method to properly build a document from a string 
+     * with data from an xml.
+     * @param   xml         string with xml data
+     * @return  a wrc Document object with parsed data
+     */
     private Document loadXMLFromString(String xml)
     throws ParserConfigurationException, IOException, SAXException, IllegalArgumentException{
 
@@ -84,6 +99,14 @@ public class Parser {
         return builder.parse(is);
     }
 
+    /**
+     * Reads contents of a given file as a resource and 
+     * converts it to String.
+     * @param   fileName    a path to a file to be parsed
+     * @return  String with data from a file
+     * @throws  IOException When InputStream, InputStreamReader or 
+     *                      BufferedReader encounters any problem
+     */
     public String getResourceFileAsString(String fileName) throws IOException {
         
         //ClassLoader classLoader = ClassLoader.getSystemClassLoader();
