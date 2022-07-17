@@ -18,6 +18,11 @@ public class Main {
     public static final int ERR_EXIT_CODE = -1;
 
     /**
+     * Private constructor to prevent instantiating
+     */
+    private Main (){}
+
+    /**
      * Main method. Reads database with currencies, calculates 
      * the final sum after exchange and prints it to stdout.
      * @param   args    array of String arguments given to the program; 

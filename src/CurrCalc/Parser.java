@@ -1,6 +1,5 @@
 package CurrCalc;
 
-//import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,10 +17,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.math.BigDecimal;
-//import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+/**
+ * Klasa odpowiedzialna za parsowanie plików xml
+ */
 public class Parser {
 
     public static final String TAG_NAME = "Cube";
@@ -44,17 +45,8 @@ public class Parser {
         ArrayList<Currency> currencies = new ArrayList<Currency>();
 
         try {
-            // DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            // dbf.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
-            // DocumentBuilder db = dbf.newDocumentBuilder();
-            //Document document = db.parse(new File(filepath));
             Document document = loadXMLFromString(xmlString);
-
             document.getDocumentElement().normalize();
-            
-            //System.out.println("Root Element :" + document.getDocumentElement().getNodeName());
-            //System.out.println("------");
-
             NodeList list = document.getElementsByTagName(TAG_NAME);
 
             currencies.ensureCapacity(list.getLength());
@@ -66,15 +58,11 @@ public class Parser {
                 if(node.getNodeType() == Node.ELEMENT_NODE){
 
                     Element element = (Element) node;
-
                     String currency = element.getAttribute(ATTRB_CURRENCY);
                     String price = element.getAttribute(ATTRB_RATE);
 
                     if(currency == null || currency.trim().isEmpty() ||
                     price == null || price.trim().isEmpty()) continue;
-
-                    //System.out.println(currency);
-                    //System.out.println(price);
 
                     currencies.add(new Currency(currency, new BigDecimal(price)));
                 }
@@ -113,8 +101,6 @@ public class Parser {
      */
     public String getResourceFileAsString(String fileName) throws IOException {
         
-        //ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        //try (InputStream is = classLoader.getResourceAsStream(fileName)) {
         try (InputStream is = this.getClass().getResourceAsStream(fileName))  {
             if (is == null) return null;
             try (InputStreamReader isr = new InputStreamReader(is);
