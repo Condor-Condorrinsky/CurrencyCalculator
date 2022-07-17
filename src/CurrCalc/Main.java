@@ -14,6 +14,8 @@ public class Main {
 
     public static final String DATABASE_PATH = "resources/prices.xml";
     public static final int DECIMAL_PLACES = 2;
+    public static final int NR_OF_ARGS = 2;
+    public static final int ERR_EXIT_CODE = -1;
 
     /**
      * Main method. Reads database with currencies, calculates 
@@ -25,16 +27,24 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        if (args.length != 2){
+        if (args.length != NR_OF_ARGS){
             System.err.println("Wrong number of arguments, quitting");
+            System.exit(ERR_EXIT_CODE);
         }
 
+        try {
+            Double.parseDouble(args[0]);
+        } catch (NumberFormatException n) {
+            System.out.println("Invalid number, please enter valid number and use dot as a separator");
+            System.exit(ERR_EXIT_CODE);
+        }
 
+        BigDecimal input = new BigDecimal(args[0]).setScale(DECIMAL_PLACES, RoundingMode.HALF_UP);
         ArrayList<Currency> database = readDatabase();
         Currency chosen = findCurrency(args[1], database);
-        BigDecimal result = calculateValue(new BigDecimal(args[0]), chosen);
+        BigDecimal result = calculateValue(input, chosen);
 
-        System.out.printf("Given sum: %s EUR\n", args[0]);
+        System.out.printf("Given sum: %s EUR\n", input);
         System.out.printf("Exchange rate: %s\n", chosen.getPrice());
         System.out.printf("Calculated sum after exchange: %s %s\n", result, chosen.getName());
     }
@@ -60,10 +70,11 @@ public class Main {
     }
 
     /**
-     * Looks for a given currency (represented as String) in a given database.
+     * Looks for a given currency (represented as String) in a given database. 
+     * If the currency is not present, terminates program.
      * @param   chosen  the currency to look for
      * @param   prices  the list with Currrencies
-     * @return  Currency object if found in the list, null otherwise
+     * @return  Currency object if found in the list
      */
     public static Currency findCurrency(String chosen, ArrayList<Currency> prices){
 
@@ -79,6 +90,7 @@ public class Main {
 
         if (result.getName() == null) {
             System.err.println("The given currency is not present in the database");
+            System.exit(ERR_EXIT_CODE);
             return null;
         }
 
