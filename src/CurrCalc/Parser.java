@@ -86,8 +86,9 @@ public class Parser {
 
     public String getResourceFileAsString(String fileName) throws IOException {
         
-        ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        try (InputStream is = classLoader.getResourceAsStream(fileName)) {
+        //ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+        //try (InputStream is = classLoader.getResourceAsStream(fileName)) {
+        try (InputStream is = this.getClass().getResourceAsStream(fileName))  {
             if (is == null) return null;
             try (InputStreamReader isr = new InputStreamReader(is);
                  BufferedReader reader = new BufferedReader(isr)) {
