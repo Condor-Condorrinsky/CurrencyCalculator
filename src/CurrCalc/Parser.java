@@ -24,6 +24,10 @@ import java.util.stream.Collectors;
 
 public class Parser {
 
+    public static final String TAG_NAME = "Cube";
+    public static final String ATTRB_CURRENCY = "currency";
+    public static final String ATTRB_RATE = "rate";
+
     /**
      * Constructor
      */
@@ -51,7 +55,7 @@ public class Parser {
             //System.out.println("Root Element :" + document.getDocumentElement().getNodeName());
             //System.out.println("------");
 
-            NodeList list = document.getElementsByTagName("Cube");
+            NodeList list = document.getElementsByTagName(TAG_NAME);
 
             currencies.ensureCapacity(list.getLength());
 
@@ -63,8 +67,8 @@ public class Parser {
 
                     Element element = (Element) node;
 
-                    String currency = element.getAttribute("currency");
-                    String price = element.getAttribute("rate");
+                    String currency = element.getAttribute(ATTRB_CURRENCY);
+                    String price = element.getAttribute(ATTRB_RATE);
 
                     if(currency == null || currency.trim().isEmpty() ||
                     price == null || price.trim().isEmpty()) continue;

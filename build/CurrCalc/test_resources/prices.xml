@@ -1,0 +1,18 @@
+<gesmes:Envelope>
+<gesmes:subject>Reference rates</gesmes:subject>
+<gesmes:Sender>
+<gesmes:name>European Central Bank</gesmes:name>
+</gesmes:Sender>
+<Cube>
+<Cube time="2022-07-14">
+<Cube currency="USD" rate="1.0005"/>
+<Cube currency="JPY" rate="139.04"/>
+<Cube currency="BGN" rate="1.9558"/>
+<Cube currency="CZK" rate="24.417"/>
+<Cube currency="DKK" rate="7.4425"/>
+<Cube currency="GBP" rate="0.84560"/>
+<Cube currency="HUF" rate="408.78"/>
+<Cube currency="PLN" rate="4.8146"/>
+</Cube>
+</Cube>
+</gesmes:Envelope>
