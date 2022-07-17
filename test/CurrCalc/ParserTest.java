@@ -21,6 +21,7 @@ public class ParserTest {
     static final String FILEPATH = "test_resources/prices.xml";
     // zawiera 3 elementy
     static final String EXAMPLE_DATA = "<gesmes:Envelope><gesmes:subject>Reference rates</gesmes:subject><gesmes:Sender><gesmes:name>European Central Bank</gesmes:name></gesmes:Sender><Cube><Cube time=\"2022-07-14\"><Cube currency=\"USD\" rate=\"1.0005\"/><Cube currency=\"JPY\" rate=\"139.04\"/><Cube currency=\"GBP\" rate=\"0.84560\"/></Cube></Cube></gesmes:Envelope>";
+    static final int NR_OF_ENTRIES = 3;
     
     @Test
     public void testParse(){
@@ -32,7 +33,7 @@ public class ParserTest {
         Currency pounds = new Currency("GBP", new BigDecimal("0.84560"));
 
         assertFalse(testList.isEmpty());
-        assertTrue(testList.size() == 3);
+        assertTrue(testList.size() == NR_OF_ENTRIES);
         
         assertTrue(testList.stream().anyMatch(c -> Objects.equals(c.getName(), dollars.getName())));
         assertTrue(testList.stream().anyMatch(c -> Objects.equals(c.getName(), yens.getName())));
